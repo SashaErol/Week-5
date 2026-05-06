@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethics Through the Ages: Timeline Race</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+:root {
+–navy: #0D1B2A;
+–red: #8B1A1A;
+–steel: #1B3A4B;
+–sky: #5B9BD5;
+–gold: #B8860B;
+–cream: #F5F0E8;
+–light-sky: #D8EAF7;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: ‘Montserrat’, sans-serif;
+background: var(–cream);
+color: var(–navy);
+min-height: 100vh;
+padding: 0 0 48px 0;
+}
+
+/* HEADER */
+.header {
+background: var(–navy);
+padding: 24px 32px 20px;
+display: flex;
+align-items: center;
+gap: 20px;
+border-bottom: 4px solid var(–gold);
+}
+.logo-wrap {
+flex-shrink: 0;
+width: 56px;
+height: 56px;
+background: #fff;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+padding: 4px;
+}
+.logo-wrap img { width: 48px; height: 48px; object-fit: contain; }
+.header-text h1 {
+font-size: 1.3rem;
+font-weight: 800;
+color: #fff;
+letter-spacing: .03em;
+line-height: 1.2;
+}
+.header-text p {
+font-size: .78rem;
+color: var(–sky);
+font-weight: 600;
+margin-top: 3px;
+text-transform: uppercase;
+letter-spacing: .08em;
+}
+
+/* INSTRUCTION BANNER */
+.instruction-banner {
+background: var(–steel);
+color: #fff;
+padding: 14px 32px;
+font-size: .85rem;
+line-height: 1.6;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.instruction-banner .icon {
+font-size: 1.4rem;
+flex-shrink: 0;
+}
+
+/* MAIN LAYOUT */
+.main {
+max-width: 1100px;
+margin: 28px auto 0;
+padding: 0 20px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 24px;
+}
+
+.panel-title {
+font-size: .7rem;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: .12em;
+color: var(–steel);
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.panel-title::after {
+content: ‘’;
+flex: 1;
+height: 2px;
+background: var(–sky);
+opacity: .4;
+}
+
+/* EVENT CARDS POOL */
+#card-pool {
+background: #fff;
+border-radius: 12px;
+border: 2px solid #dce7f0;
+padding: 16px;
+min-height: 520px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+#card-pool.drag-over {
+border-color: var(–sky);
+background: var(–light-sky);
+}
+
+.event-card {
+background: var(–navy);
+color: #fff;
+border-radius: 8px;
+padding: 12px 14px;
+cursor: grab;
+user-select: none;
+border-left: 4px solid var(–sky);
+transition: box-shadow .15s, transform .15s;
+position: relative;
+}
+.event-card:active { cursor: grabbing; }
+.event-card.dragging {
+opacity: .5;
+transform: scale(.97);
+}
+.event-card:hover {
+box-shadow: 0 4px 18px rgba(91,155,213,.35);
+transform: translateY(-2px);
+}
+.event-card .card-label {
+font-size: .62rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: .1em;
+color: var(–sky);
+margin-bottom: 4px;
+}
+.event-card .card-text {
+font-size: .8rem;
+line-height: 1.5;
+font-weight: 500;
+}
+
+/* TIMELINE */
+#timeline {
+display: flex;
+flex-direction: column;
+gap: 0;
+position: relative;
+}
+
+.timeline-slot {
+display: flex;
+align-items: stretch;
+min-height: 68px;
+position: relative;
+}
+
+/* Vertical line */
+.timeline-slot::before {
+content: ‘’;
+position: absolute;
+left: 38px;
+top: 0;
+bottom: 0;
+width: 2px;
+background: var(–sky);
+opacity: .35;
+z-index: 0;
+}
+.timeline-slot:first-child::before { top: 50%; }
+.timeline-slot:last-child::before { bottom: 50%; }
+
+.slot-meta {
+width: 78px;
+flex-shrink: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 4px 0;
+z-index: 1;
+}
+.slot-dot {
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: var(–sky);
+border: 3px solid #fff;
+box-shadow: 0 0 0 2px var(–sky);
+flex-shrink: 0;
+transition: background .2s;
+}
+.timeline-slot.filled .slot-dot {
+background: var(–gold);
+box-shadow: 0 0 0 2px var(–gold);
+}
+.timeline-slot.correct .slot-dot {
+background: #2e7d32;
+box-shadow: 0 0 0 2px #2e7d32;
+}
+.timeline-slot.wrong .slot-dot {
+background: var(–red);
+box-shadow: 0 0 0 2px var(–red);
+}
+
+.slot-drop {
+flex: 1;
+margin: 4px 0;
+border-radius: 8px;
+border: 2px dashed #b0c8df;
+background: #f0f6fb;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: background .15s, border-color .15s;
+min-height: 60px;
+cursor: pointer;
+position: relative;
+}
+.slot-drop.drag-over {
+background: var(–light-sky);
+border-color: var(–sky);
+border-style: solid;
+}
+.slot-drop.occupied {
+background: var(–navy);
+border-color: var(–navy);
+border-style: solid;
+}
+.slot-drop.correct {
+background: #e8f5e9;
+border-color: #2e7d32;
+border-style: solid;
+}
+.slot-drop.wrong {
+background: #ffebee;
+border-color: var(–red);
+border-style: solid;
+}
+.slot-placeholder {
+font-size: .72rem;
+font-weight: 700;
+color: #8cafc9;
+text-transform: uppercase;
+letter-spacing: .08em;
+}
+.slot-drop .event-card {
+width: 100%;
+margin: 0;
+border-radius: 6px;
+cursor: default;
+}
+.slot-drop .event-card:hover { transform: none; box-shadow: none; }
+
+/* Remove button on placed card */
+.remove-btn {
+position: absolute;
+top: 6px;
+right: 8px;
+background: rgba(255,255,255,.18);
+border: none;
+color: #fff;
+font-size: .9rem;
+cursor: pointer;
+border-radius: 4px;
+width: 22px;
+height: 22px;
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 1;
+font-weight: 700;
+transition: background .15s;
+z-index: 10;
+}
+.remove-btn:hover { background: rgba(255,255,255,.35); }
+
+/* BOTTOM CONTROLS */
+.controls {
+max-width: 1100px;
+margin: 22px auto 0;
+padding: 0 20px;
+display: flex;
+gap: 14px;
+align-items: center;
+flex-wrap: wrap;
+}
+.btn {
+padding: 11px 28px;
+font-family: ‘Montserrat’, sans-serif;
+font-weight: 700;
+font-size: .82rem;
+border: none;
+border-radius: 7px;
+cursor: pointer;
+letter-spacing: .05em;
+text-transform: uppercase;
+transition: background .15s, transform .1s;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary {
+background: var(–red);
+color: #fff;
+}
+.btn-primary:hover { background: #a02020; }
+.btn-secondary {
+background: var(–steel);
+color: #fff;
+}
+.btn-secondary:hover { background: #264d63; }
+.btn-outline {
+background: transparent;
+color: var(–navy);
+border: 2px solid var(–navy);
+}
+.btn-outline:hover { background: var(–navy); color: #fff; }
+
+.score-display {
+margin-left: auto;
+font-size: .85rem;
+font-weight: 700;
+color: var(–steel);
+background: #fff;
+padding: 10px 20px;
+border-radius: 7px;
+border: 2px solid #dce7f0;
+}
+
+/* RESULT PANEL */
+#result-panel {
+max-width: 1100px;
+margin: 20px auto 0;
+padding: 0 20px;
+display: none;
+}
+#result-panel.visible { display: block; }
+.result-box {
+background: #fff;
+border-radius: 12px;
+border: 2px solid #dce7f0;
+padding: 20px 24px;
+}
+.result-box h3 {
+font-size: 1rem;
+font-weight: 800;
+color: var(–navy);
+margin-bottom: 14px;
+}
+.answer-table {
+width: 100%;
+border-collapse: collapse;
+font-size: .78rem;
+}
+.answer-table th {
+background: var(–navy);
+color: #fff;
+padding: 8px 12px;
+text-align: left;
+font-weight: 700;
+letter-spacing: .04em;
+}
+.answer-table td {
+padding: 8px 12px;
+border-bottom: 1px solid #e8eef4;
+vertical-align: top;
+}
+.answer-table tr:nth-child(even) td { background: #f5f9fc; }
+.tag-correct {
+display: inline-block;
+background: #e8f5e9;
+color: #2e7d32;
+font-size: .65rem;
+font-weight: 700;
+padding: 2px 8px;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: .06em;
+}
+.tag-wrong {
+display: inline-block;
+background: #ffebee;
+color: #b71c1c;
+font-size: .65rem;
+font-weight: 700;
+padding: 2px 8px;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: .06em;
+}
+
+/* Era badge */
+.era-badge {
+display: inline-block;
+background: var(–light-sky);
+color: var(–steel);
+font-size: .62rem;
+font-weight: 700;
+padding: 2px 8px;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: .05em;
+margin-top: 4px;
+}
+
+/* Progress bar */
+.progress-wrap {
+max-width: 1100px;
+margin: 12px auto 0;
+padding: 0 20px;
+display: flex;
+align-items: center;
+gap: 12px;
+font-size: .72rem;
+font-weight: 700;
+color: var(–steel);
+}
+.progress-bar {
+flex: 1;
+height: 8px;
+background: #dce7f0;
+border-radius: 4px;
+overflow: hidden;
+}
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–sky), var(–gold));
+border-radius: 4px;
+transition: width .3s;
+width: 0%;
+}
+
+@media (max-width: 700px) {
+.main { grid-template-columns: 1fr; }
+.header { padding: 16px 16px 14px; }
+.instruction-banner { padding: 12px 16px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+  <div class="logo-wrap">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAKEA2QDACIAAREBAhEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMAAAERAhEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorE17xboPhmLfq+qW9scZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2luc" alt="Approach International Logo" />
+  </div>
+  <div class="header-text">
+    <h1>Ethics Through the Ages: Timeline Race</h1>
+    <p>Activity 2 &mdash; Week 5: Culture, Time &amp; Business Ethics</p>
+  </div>
+</div>
+
+<!-- INSTRUCTION -->
+
+<div class="instruction-banner">
+  <span class="icon">&#9998;</span>
+  <span>
+    <strong>Instructions:</strong> Drag each event card from the pool on the left and drop it into the correct position on the timeline (oldest to most recent). Once all 10 events are placed, click <strong>Check My Timeline</strong> to see your score. Click any placed card's <strong>&times;</strong> to return it to the pool.
+  </span>
+</div>
+
+<!-- PROGRESS -->
+
+<div class="progress-wrap">
+  <span id="progress-label">0 / 10 placed</span>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+  <!-- CARD POOL -->
+
+  <div>
+    <div class="panel-title">Event Cards &mdash; Drag to Timeline</div>
+    <div id="card-pool" ondragover="onPoolDragOver(event)" ondrop="onPoolDrop(event)"></div>
+  </div>
+
+  <!-- TIMELINE -->
+
+  <div>
+    <div class="panel-title">Timeline &mdash; Oldest to Most Recent</div>
+    <div id="timeline"></div>
+  </div>
+
+</div>
+
+<!-- CONTROLS -->
+
+<div class="controls">
+  <button class="btn btn-primary" onclick="checkTimeline()">Check My Timeline</button>
+  <button class="btn btn-secondary" onclick="revealAnswers()">Show Answers</button>
+  <button class="btn btn-outline" onclick="resetActivity()">Reset</button>
+  <div class="score-display" id="score-display">Score: &mdash;</div>
+</div>
+
+<!-- RESULT PANEL -->
+
+<div id="result-panel">
+  <div class="result-box">
+    <h3 id="result-heading"></h3>
+    <table class="answer-table" id="answer-table">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Correct Year</th>
+          <th>Era</th>
+          <th>Event</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="answer-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const EVENTS = [
+  {
+    id: 'e1',
+    label: 'Event 1',
+    text: "The Dutch 'buy' Manhattan from the Lenape tribe for about $1,000 in goods. The two cultures had very different ideas about land ownership.",
+    year: 1626,
+    era: 'Mercantilism'
+  },
+  {
+    id: 'e2',
+    label: 'Event 2',
+    text: "European countries colonize Africa and Asia, extracting raw materials (cotton, diamonds, tea) and using forced labor. Few people question this practice.",
+    year: '1800s',
+    yearSort: 1800,
+    era: 'Mercantilism / Industrial Revolution'
+  },
+  {
+    id: 'e3',
+    label: 'Event 3',
+    text: "John D. Rockefeller builds Standard Oil into a monopoly using aggressive business tactics. He also donates millions to charity.",
+    year: '1870s',
+    yearSort: 1870,
+    era: 'Industrial Revolution'
+  },
+  {
+    id: 'e4',
+    label: 'Event 4',
+    text: "Upton Sinclair publishes 'The Jungle,' exposing dangerous conditions in U.S. meatpacking plants. This leads to the first food safety laws.",
+    year: 1906,
+    era: 'Industrial Revolution / Post-Industrial'
+  },
+  {
+    id: 'e5',
+    label: 'Event 5',
+    text: "Edward Bernays markets cigarettes to women as 'Torches of Freedom,' linking smoking to equality. Doctors appear in cigarette advertisements.",
+    year: 1929,
+    era: 'Post-Industrial'
+  },
+  {
+    id: 'e6',
+    label: 'Event 6',
+    text: "The U.S. Surgeon General releases a report proving that cigarettes cause cancer. This leads to advertising bans and health warnings on packages.",
+    year: 1964,
+    era: 'Information Age'
+  },
+  {
+    id: 'e7',
+    label: 'Event 7',
+    text: "Nike is criticized for using sweatshops in China and Southeast Asia. Workers face terrible conditions for very low pay. Nike eventually demands suppliers improve.",
+    year: '1990s',
+    yearSort: 1990,
+    era: 'Information Age / Globalization'
+  },
+  {
+    id: 'e8',
+    label: 'Event 8',
+    text: "The United Nations launches the Global Compact, asking companies worldwide to follow principles about human rights, labor, environment, and anti-corruption.",
+    year: 2000,
+    era: 'Globalization'
+  },
+  {
+    id: 'e9',
+    label: 'Event 9',
+    text: "A global financial crisis caused by bank fraud and risky investments leads to the Dodd-Frank Act, which creates stricter rules for banks.",
+    year: 2008,
+    era: 'Globalization'
+  },
+  {
+    id: 'e10',
+    label: 'Event 10',
+    text: "The Petrobras scandal in Brazil reveals billions of dollars in bribes between company executives and politicians. It becomes one of the largest corruption cases in history.",
+    year: 2014,
+    era: 'Globalization'
+  }
+];
+
+// Sorted correct order by yearSort or year
+const CORRECT_ORDER = [...EVENTS].sort((a, b) => {
+  const ya = a.yearSort || a.year;
+  const yb = b.yearSort || b.year;
+  return ya - yb;
+});
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let poolCards = [];     // ids in pool
+let slotCards = [];     // ids in slots (null = empty), length = 10
+let dragId = null;
+let dragFrom = null;    // 'pool' | slotIndex (number)
+let checked = false;
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function init() {
+  // Shuffle pool
+  poolCards = shuffle(EVENTS.map(e => e.id));
+  slotCards = Array(10).fill(null);
+  checked = false;
+
+  renderPool();
+  renderTimeline();
+  updateProgress();
+  document.getElementById('result-panel').classList.remove('visible');
+  document.getElementById('score-display').innerHTML = 'Score: &mdash;';
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getEvent(id) { return EVENTS.find(e => e.id === id); }
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderPool() {
+  const pool = document.getElementById('card-pool');
+  pool.innerHTML = '';
+  if (poolCards.length === 0) {
+    pool.innerHTML = '<div style="text-align:center;padding:40px 20px;color:#8cafc9;font-size:.8rem;font-weight:700;">All cards placed on timeline!</div>';
+    return;
+  }
+  poolCards.forEach(id => {
+    pool.appendChild(createCard(id, 'pool'));
+  });
+}
+
+function renderTimeline() {
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = '';
+  for (let i = 0; i < 10; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'timeline-slot' + (slotCards[i] ? ' filled' : '');
+    slot.innerHTML = `
+      <div class="slot-meta">
+        <div class="slot-dot"></div>
+      </div>
+      <div class="slot-drop" id="slot-${i}"
+           ondragover="onSlotDragOver(event, ${i})"
+           ondrop="onSlotDrop(event, ${i})"
+           ondragleave="onSlotDragLeave(event, ${i})"
+           onclick="onSlotClick(${i})">
+        ${slotCards[i]
+          ? buildCardInner(slotCards[i], i)
+          : `<span class="slot-placeholder">Position ${i+1}</span>`
+        }
+      </div>
+    `;
+    if (slotCards[i]) {
+      slot.querySelector('.slot-drop').classList.add('occupied');
+    }
+    tl.appendChild(slot);
+  }
+}
+
+function createCard(id, from) {
+  const ev = getEvent(id);
+  const div = document.createElement('div');
+  div.className = 'event-card';
+  div.draggable = true;
+  div.dataset.id = id;
+  div.innerHTML = `<div class="card-label">${ev.label}</div><div class="card-text">${ev.text}</div>`;
+  div.addEventListener('dragstart', e => onCardDragStart(e, id, from));
+  div.addEventListener('dragend', onCardDragEnd);
+  return div;
+}
+
+function buildCardInner(id, slotIdx) {
+  const ev = getEvent(id);
+  return `
+    <div class="event-card" draggable="true"
+         data-id="${id}"
+         ondragstart="onCardDragStart(event, '${id}', ${slotIdx})"
+         ondragend="onCardDragEnd(event)">
+      <button class="remove-btn" onclick="removeFromSlot(event, ${slotIdx})" title="Return to pool">&times;</button>
+      <div class="card-label">${ev.label}</div>
+      <div class="card-text">${ev.text}</div>
+    </div>
+  `;
+}
+
+function updateProgress() {
+  const placed = slotCards.filter(Boolean).length;
+  document.getElementById('progress-label').textContent = `${placed} / 10 placed`;
+  document.getElementById('progress-fill').style.width = (placed * 10) + '%';
+}
+
+// ─── DRAG & DROP ──────────────────────────────────────────────────────────────
+function onCardDragStart(e, id, from) {
+  dragId = id;
+  dragFrom = from;
+  e.dataTransfer.effectAllowed = 'move';
+  setTimeout(() => {
+    const el = document.querySelector(`.event-card[data-id="${id}"]`);
+    if (el) el.classList.add('dragging');
+  }, 0);
+}
+function onCardDragEnd(e) {
+  document.querySelectorAll('.event-card').forEach(c => c.classList.remove('dragging'));
+  document.querySelectorAll('.slot-drop').forEach(s => s.classList.remove('drag-over'));
+  document.getElementById('card-pool').classList.remove('drag-over');
+}
+
+function onSlotDragOver(e, idx) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  document.getElementById(`slot-${idx}`).classList.add('drag-over');
+}
+function onSlotDragLeave(e, idx) {
+  document.getElementById(`slot-${idx}`).classList.remove('drag-over');
+}
+function onSlotDrop(e, idx) {
+  e.preventDefault();
+  document.getElementById(`slot-${idx}`).classList.remove('drag-over');
+  if (!dragId) return;
+
+  const existing = slotCards[idx];
+
+  // If slot occupied, swap
+  if (existing && existing !== dragId) {
+    // Put existing back
+    if (typeof dragFrom === 'number') {
+      // swap slot -> slot
+      slotCards[dragFrom] = existing;
+    } else {
+      poolCards.push(existing);
+    }
+  } else if (!existing && typeof dragFrom === 'number') {
+    // Clear old slot
+    slotCards[dragFrom] = null;
+  }
+
+  // Remove from pool if coming from pool
+  if (dragFrom === 'pool') {
+    poolCards = poolCards.filter(id => id !== dragId);
+  } else if (typeof dragFrom === 'number' && dragFrom !== idx) {
+    slotCards[dragFrom] = existing || null;
+  }
+
+  slotCards[idx] = dragId;
+  dragId = null;
+  dragFrom = null;
+  checked = false;
+  clearFeedback();
+
+  renderPool();
+  renderTimeline();
+  updateProgress();
+}
+
+function onPoolDragOver(e) {
+  e.preventDefault();
+  document.getElementById('card-pool').classList.add('drag-over');
+}
+function onPoolDrop(e) {
+  e.preventDefault();
+  document.getElementById('card-pool').classList.remove('drag-over');
+  if (!dragId) return;
+  if (typeof dragFrom === 'number') {
+    slotCards[dragFrom] = null;
+    poolCards.push(dragId);
+  }
+  dragId = null;
+  dragFrom = null;
+  checked = false;
+  clearFeedback();
+
+  renderPool();
+  renderTimeline();
+  updateProgress();
+}
+
+function onSlotClick(idx) {
+  // Touch-friendly: if a slot has a card, do nothing (remove btn handles it)
+}
+
+function removeFromSlot(e, idx) {
+  e.stopPropagation();
+  const id = slotCards[idx];
+  if (!id) return;
+  slotCards[idx] = null;
+  poolCards.push(id);
+  checked = false;
+  clearFeedback();
+  renderPool();
+  renderTimeline();
+  updateProgress();
+}
+
+// ─── CHECK ────────────────────────────────────────────────────────────────────
+function checkTimeline() {
+  const placed = slotCards.filter(Boolean).length;
+  if (placed < 10) {
+    alert('Please place all 10 event cards on the timeline before checking!');
+    return;
+  }
+  checked = true;
+
+  let correct = 0;
+  slotCards.forEach((id, i) => {
+    const slot = document.getElementById(`slot-${i}`);
+    const tsSlot = document.querySelector(`.timeline-slot:nth-child(${i+1})`);
+    if (id === CORRECT_ORDER[i].id) {
+      correct++;
+      slot.classList.add('correct');
+      slot.classList.remove('occupied');
+      if (tsSlot) {
+        tsSlot.classList.add('correct');
+        tsSlot.classList.remove('filled');
+      }
+    } else {
+      slot.classList.add('wrong');
+      slot.classList.remove('occupied');
+      if (tsSlot) {
+        tsSlot.classList.add('wrong');
+        tsSlot.classList.remove('filled');
+      }
+    }
+  });
+
+  document.getElementById('score-display').textContent = `Score: ${correct} / 10`;
+  buildResultTable(false);
+  document.getElementById('result-panel').classList.add('visible');
+
+  let msg = '';
+  if (correct === 10) msg = 'Perfect score! Outstanding work!';
+  else if (correct >= 7) msg = `Great job! ${correct}/10 correct. Review the ones you missed.`;
+  else msg = `Good effort! ${correct}/10 correct. Let\'s go over the full timeline together.`;
+  document.getElementById('result-heading').textContent = msg;
+}
+
+function revealAnswers() {
+  slotCards = CORRECT_ORDER.map(e => e.id);
+  poolCards = [];
+  checked = true;
+  renderPool();
+  renderTimeline();
+  updateProgress();
+
+  document.querySelectorAll('.slot-drop').forEach((slot, i) => {
+    slot.classList.add('correct');
+    slot.classList.remove('occupied', 'wrong');
+  });
+  document.querySelectorAll('.timeline-slot').forEach(ts => {
+    ts.classList.add('correct');
+    ts.classList.remove('filled', 'wrong');
+  });
+
+  document.getElementById('score-display').innerHTML = 'Score: &mdash;';
+  buildResultTable(true);
+  document.getElementById('result-heading').textContent = 'Correct Timeline Order:';
+  document.getElementById('result-panel').classList.add('visible');
+}
+
+function buildResultTable(showAll) {
+  const tbody = document.getElementById('answer-tbody');
+  tbody.innerHTML = '';
+  CORRECT_ORDER.forEach((ev, i) => {
+    const placedId = slotCards[i];
+    const isCorrect = placedId === ev.id;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${i+1}</strong></td>
+      <td><strong>${ev.year}</strong></td>
+      <td><span class="era-badge">${ev.era}</span></td>
+      <td style="font-size:.75rem;line-height:1.5">${ev.text}</td>
+      <td>${showAll ? '' : (isCorrect ? '<span class="tag-correct">Correct</span>' : '<span class="tag-wrong">Wrong</span>')}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function clearFeedback() {
+  document.querySelectorAll('.slot-drop').forEach(s => {
+    s.classList.remove('correct', 'wrong');
+  });
+  document.querySelectorAll('.timeline-slot').forEach(ts => {
+    ts.classList.remove('correct', 'wrong');
+  });
+}
+
+function resetActivity() {
+  init();
+}
+
+// ─── START ────────────────────────────────────────────────────────────────────
+init();
+</script>
+
+</body>
+</html>
