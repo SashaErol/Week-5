@@ -6,431 +6,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ethics Through the Ages: Timeline Race</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── TOKENS ── */
 :root {
-–navy: #0D1B2A;
-–red: #8B1A1A;
-–steel: #1B3A4B;
-–sky: #5B9BD5;
-–gold: #B8860B;
-–cream: #F5F0E8;
-–light-sky: #D8EAF7;
+–navy:      #0D1B2A;
+–red:       #8B1A1A;
+–steel:     #1B3A4B;
+–sky:       #5B9BD5;
+–gold:      #B8860B;
+–cream:     #F5F0E8;
+–lightsky:  #D8EAF7;
+–green:     #2E7D32;
+–greenlight:#E8F5E9;
+–redlight:  #FFEBEE;
+–border:    #C8D9EA;
+–font:      ‘Segoe UI’, ‘Helvetica Neue’, Arial, sans-serif;
 }
 
-- { box-sizing: border-box; margin: 0; padding: 0; }
-
+/* ── BASE ── */
 body {
-font-family: ‘Montserrat’, sans-serif;
+font-family: var(–font);
 background: var(–cream);
 color: var(–navy);
 min-height: 100vh;
-padding: 0 0 48px 0;
+padding-bottom: 60px;
 }
 
-/* HEADER */
+/* ── HEADER ── */
 .header {
 background: var(–navy);
-padding: 24px 32px 20px;
+padding: 20px 28px;
+border-bottom: 4px solid var(–gold);
 display: flex;
 align-items: center;
-gap: 20px;
-border-bottom: 4px solid var(–gold);
+gap: 16px;
 }
-.logo-wrap {
-flex-shrink: 0;
-width: 56px;
-height: 56px;
+.header-logo {
+width: 52px; height: 52px;
 background: #fff;
 border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-padding: 4px;
+display: flex; align-items: center; justify-content: center;
+font-size: 1.6rem;
+font-weight: 900;
+color: var(–navy);
+flex-shrink: 0;
+letter-spacing: -.02em;
 }
-.logo-wrap img { width: 48px; height: 48px; object-fit: contain; }
 .header-text h1 {
-font-size: 1.3rem;
+font-size: 1.25rem;
 font-weight: 800;
 color: #fff;
-letter-spacing: .03em;
-line-height: 1.2;
+line-height: 1.25;
 }
 .header-text p {
-font-size: .78rem;
+font-size: .72rem;
 color: var(–sky);
-font-weight: 600;
-margin-top: 3px;
-text-transform: uppercase;
-letter-spacing: .08em;
-}
-
-/* INSTRUCTION BANNER */
-.instruction-banner {
-background: var(–steel);
-color: #fff;
-padding: 14px 32px;
-font-size: .85rem;
-line-height: 1.6;
-display: flex;
-align-items: center;
-gap: 12px;
-}
-.instruction-banner .icon {
-font-size: 1.4rem;
-flex-shrink: 0;
-}
-
-/* MAIN LAYOUT */
-.main {
-max-width: 1100px;
-margin: 28px auto 0;
-padding: 0 20px;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 24px;
-}
-
-.panel-title {
-font-size: .7rem;
-font-weight: 800;
-text-transform: uppercase;
-letter-spacing: .12em;
-color: var(–steel);
-margin-bottom: 12px;
-display: flex;
-align-items: center;
-gap: 8px;
-}
-.panel-title::after {
-content: ‘’;
-flex: 1;
-height: 2px;
-background: var(–sky);
-opacity: .4;
-}
-
-/* EVENT CARDS POOL */
-#card-pool {
-background: #fff;
-border-radius: 12px;
-border: 2px solid #dce7f0;
-padding: 16px;
-min-height: 520px;
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-#card-pool.drag-over {
-border-color: var(–sky);
-background: var(–light-sky);
-}
-
-.event-card {
-background: var(–navy);
-color: #fff;
-border-radius: 8px;
-padding: 12px 14px;
-cursor: grab;
-user-select: none;
-border-left: 4px solid var(–sky);
-transition: box-shadow .15s, transform .15s;
-position: relative;
-}
-.event-card:active { cursor: grabbing; }
-.event-card.dragging {
-opacity: .5;
-transform: scale(.97);
-}
-.event-card:hover {
-box-shadow: 0 4px 18px rgba(91,155,213,.35);
-transform: translateY(-2px);
-}
-.event-card .card-label {
-font-size: .62rem;
 font-weight: 700;
+margin-top: 4px;
 text-transform: uppercase;
 letter-spacing: .1em;
-color: var(–sky);
-margin-bottom: 4px;
-}
-.event-card .card-text {
-font-size: .8rem;
-line-height: 1.5;
-font-weight: 500;
 }
 
-/* TIMELINE */
-#timeline {
-display: flex;
-flex-direction: column;
-gap: 0;
-position: relative;
-}
-
-.timeline-slot {
-display: flex;
-align-items: stretch;
-min-height: 68px;
-position: relative;
-}
-
-/* Vertical line */
-.timeline-slot::before {
-content: ‘’;
-position: absolute;
-left: 38px;
-top: 0;
-bottom: 0;
-width: 2px;
-background: var(–sky);
-opacity: .35;
-z-index: 0;
-}
-.timeline-slot:first-child::before { top: 50%; }
-.timeline-slot:last-child::before { bottom: 50%; }
-
-.slot-meta {
-width: 78px;
-flex-shrink: 0;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-padding: 4px 0;
-z-index: 1;
-}
-.slot-dot {
-width: 18px;
-height: 18px;
-border-radius: 50%;
-background: var(–sky);
-border: 3px solid #fff;
-box-shadow: 0 0 0 2px var(–sky);
-flex-shrink: 0;
-transition: background .2s;
-}
-.timeline-slot.filled .slot-dot {
-background: var(–gold);
-box-shadow: 0 0 0 2px var(–gold);
-}
-.timeline-slot.correct .slot-dot {
-background: #2e7d32;
-box-shadow: 0 0 0 2px #2e7d32;
-}
-.timeline-slot.wrong .slot-dot {
-background: var(–red);
-box-shadow: 0 0 0 2px var(–red);
-}
-
-.slot-drop {
-flex: 1;
-margin: 4px 0;
-border-radius: 8px;
-border: 2px dashed #b0c8df;
-background: #f0f6fb;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: background .15s, border-color .15s;
-min-height: 60px;
-cursor: pointer;
-position: relative;
-}
-.slot-drop.drag-over {
-background: var(–light-sky);
-border-color: var(–sky);
-border-style: solid;
-}
-.slot-drop.occupied {
-background: var(–navy);
-border-color: var(–navy);
-border-style: solid;
-}
-.slot-drop.correct {
-background: #e8f5e9;
-border-color: #2e7d32;
-border-style: solid;
-}
-.slot-drop.wrong {
-background: #ffebee;
-border-color: var(–red);
-border-style: solid;
-}
-.slot-placeholder {
-font-size: .72rem;
-font-weight: 700;
-color: #8cafc9;
-text-transform: uppercase;
-letter-spacing: .08em;
-}
-.slot-drop .event-card {
-width: 100%;
-margin: 0;
-border-radius: 6px;
-cursor: default;
-}
-.slot-drop .event-card:hover { transform: none; box-shadow: none; }
-
-/* Remove button on placed card */
-.remove-btn {
-position: absolute;
-top: 6px;
-right: 8px;
-background: rgba(255,255,255,.18);
-border: none;
-color: #fff;
-font-size: .9rem;
-cursor: pointer;
-border-radius: 4px;
-width: 22px;
-height: 22px;
-display: flex;
-align-items: center;
-justify-content: center;
-line-height: 1;
-font-weight: 700;
-transition: background .15s;
-z-index: 10;
-}
-.remove-btn:hover { background: rgba(255,255,255,.35); }
-
-/* BOTTOM CONTROLS */
-.controls {
-max-width: 1100px;
-margin: 22px auto 0;
-padding: 0 20px;
-display: flex;
-gap: 14px;
-align-items: center;
-flex-wrap: wrap;
-}
-.btn {
-padding: 11px 28px;
-font-family: ‘Montserrat’, sans-serif;
-font-weight: 700;
-font-size: .82rem;
-border: none;
-border-radius: 7px;
-cursor: pointer;
-letter-spacing: .05em;
-text-transform: uppercase;
-transition: background .15s, transform .1s;
-}
-.btn:active { transform: scale(.97); }
-.btn-primary {
-background: var(–red);
-color: #fff;
-}
-.btn-primary:hover { background: #a02020; }
-.btn-secondary {
+/* ── BANNER ── */
+.banner {
 background: var(–steel);
 color: #fff;
+padding: 13px 28px;
+font-size: .82rem;
+line-height: 1.6;
 }
-.btn-secondary:hover { background: #264d63; }
-.btn-outline {
-background: transparent;
-color: var(–navy);
-border: 2px solid var(–navy);
-}
-.btn-outline:hover { background: var(–navy); color: #fff; }
+.banner strong { color: var(–sky); }
 
-.score-display {
-margin-left: auto;
-font-size: .85rem;
-font-weight: 700;
-color: var(–steel);
-background: #fff;
-padding: 10px 20px;
-border-radius: 7px;
-border: 2px solid #dce7f0;
-}
-
-/* RESULT PANEL */
-#result-panel {
-max-width: 1100px;
-margin: 20px auto 0;
-padding: 0 20px;
-display: none;
-}
-#result-panel.visible { display: block; }
-.result-box {
-background: #fff;
-border-radius: 12px;
-border: 2px solid #dce7f0;
-padding: 20px 24px;
-}
-.result-box h3 {
-font-size: 1rem;
-font-weight: 800;
-color: var(–navy);
-margin-bottom: 14px;
-}
-.answer-table {
-width: 100%;
-border-collapse: collapse;
-font-size: .78rem;
-}
-.answer-table th {
-background: var(–navy);
-color: #fff;
-padding: 8px 12px;
-text-align: left;
-font-weight: 700;
-letter-spacing: .04em;
-}
-.answer-table td {
-padding: 8px 12px;
-border-bottom: 1px solid #e8eef4;
-vertical-align: top;
-}
-.answer-table tr:nth-child(even) td { background: #f5f9fc; }
-.tag-correct {
-display: inline-block;
-background: #e8f5e9;
-color: #2e7d32;
-font-size: .65rem;
-font-weight: 700;
-padding: 2px 8px;
-border-radius: 4px;
-text-transform: uppercase;
-letter-spacing: .06em;
-}
-.tag-wrong {
-display: inline-block;
-background: #ffebee;
-color: #b71c1c;
-font-size: .65rem;
-font-weight: 700;
-padding: 2px 8px;
-border-radius: 4px;
-text-transform: uppercase;
-letter-spacing: .06em;
-}
-
-/* Era badge */
-.era-badge {
-display: inline-block;
-background: var(–light-sky);
-color: var(–steel);
-font-size: .62rem;
-font-weight: 700;
-padding: 2px 8px;
-border-radius: 4px;
-text-transform: uppercase;
-letter-spacing: .05em;
-margin-top: 4px;
-}
-
-/* Progress bar */
-.progress-wrap {
-max-width: 1100px;
-margin: 12px auto 0;
-padding: 0 20px;
+/* ── PROGRESS ── */
+.progress-row {
 display: flex;
 align-items: center;
 gap: 12px;
+max-width: 1080px;
+margin: 16px auto 0;
+padding: 0 20px;
 font-size: .72rem;
 font-weight: 700;
 color: var(–steel);
@@ -438,23 +94,277 @@ color: var(–steel);
 .progress-bar {
 flex: 1;
 height: 8px;
-background: #dce7f0;
-border-radius: 4px;
+background: var(–border);
+border-radius: 99px;
 overflow: hidden;
 }
 .progress-fill {
 height: 100%;
-background: linear-gradient(90deg, var(–sky), var(–gold));
-border-radius: 4px;
-transition: width .3s;
 width: 0%;
+background: linear-gradient(90deg, var(–sky) 0%, var(–gold) 100%);
+border-radius: 99px;
+transition: width .35s ease;
 }
 
-@media (max-width: 700px) {
-.main { grid-template-columns: 1fr; }
-.header { padding: 16px 16px 14px; }
-.instruction-banner { padding: 12px 16px; }
+/* ── MAIN GRID ── */
+.main {
+max-width: 1080px;
+margin: 20px auto 0;
+padding: 0 20px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 22px;
 }
+@media (max-width: 680px) {
+.main { grid-template-columns: 1fr; }
+}
+
+.col-title {
+font-size: .65rem;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: .14em;
+color: var(–steel);
+margin-bottom: 10px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.col-title::after {
+content: ‘’;
+flex: 1;
+height: 2px;
+background: var(–sky);
+opacity: .3;
+border-radius: 2px;
+}
+
+/* ── CARD POOL ── */
+#pool {
+background: #fff;
+border: 2px solid var(–border);
+border-radius: 12px;
+padding: 14px;
+min-height: 500px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+transition: border-color .15s, background .15s;
+}
+#pool.dv { border-color: var(–sky); background: var(–lightsky); }
+
+.empty-pool {
+text-align: center;
+padding: 48px 16px;
+color: #8bafc9;
+font-size: .78rem;
+font-weight: 700;
+}
+
+/* ── EVENT CARD ── */
+.card {
+background: var(–navy);
+color: #fff;
+border-radius: 8px;
+padding: 11px 13px;
+border-left: 4px solid var(–sky);
+cursor: grab;
+user-select: none;
+transition: transform .15s, box-shadow .15s;
+position: relative;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 5px 18px rgba(91,155,213,.3); }
+.card:active { cursor: grabbing; }
+.card.dragging { opacity: .45; transform: scale(.97); }
+.card-num {
+font-size: .6rem;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: .1em;
+color: var(–sky);
+margin-bottom: 4px;
+}
+.card-body {
+font-size: .78rem;
+line-height: 1.55;
+font-weight: 500;
+}
+
+/* ── TIMELINE ── */
+#timeline { display: flex; flex-direction: column; }
+
+.tslot {
+display: flex;
+align-items: stretch;
+min-height: 72px;
+position: relative;
+}
+/* vertical connector line */
+.tslot::before {
+content: ‘’;
+position: absolute;
+left: 38px;
+top: 0; bottom: 0;
+width: 2px;
+background: var(–sky);
+opacity: .25;
+z-index: 0;
+}
+.tslot:first-child::before { top: 50%; }
+.tslot:last-child::before  { bottom: 50%; }
+
+.tslot-meta {
+width: 78px;
+flex-shrink: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+}
+.dot {
+width: 16px; height: 16px;
+border-radius: 50%;
+background: var(–sky);
+border: 3px solid var(–cream);
+box-shadow: 0 0 0 2px var(–sky);
+flex-shrink: 0;
+transition: background .2s, box-shadow .2s;
+}
+.tslot.filled  .dot { background: var(–gold);  box-shadow: 0 0 0 2px var(–gold); }
+.tslot.correct .dot { background: var(–green); box-shadow: 0 0 0 2px var(–green); }
+.tslot.wrong   .dot { background: var(–red);   box-shadow: 0 0 0 2px var(–red); }
+
+.drop-zone {
+flex: 1;
+margin: 5px 0;
+border-radius: 8px;
+border: 2px dashed var(–border);
+background: #f3f8fd;
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 62px;
+transition: background .15s, border-color .15s;
+position: relative;
+}
+.drop-zone.dv      { background: var(–lightsky); border-color: var(–sky); border-style: solid; }
+.drop-zone.occupied{ background: var(–navy); border-color: var(–navy); border-style: solid; }
+.drop-zone.correct { background: var(–greenlight); border-color: var(–green); border-style: solid; }
+.drop-zone.wrong   { background: var(–redlight);   border-color: var(–red);   border-style: solid; }
+
+.slot-label {
+font-size: .68rem;
+font-weight: 800;
+color: #9ab8d0;
+text-transform: uppercase;
+letter-spacing: .08em;
+}
+
+/* card inside slot */
+.drop-zone .card { width: 100%; cursor: default; }
+.drop-zone .card:hover { transform: none; box-shadow: none; }
+
+/* remove button */
+.rm {
+position: absolute;
+top: 5px; right: 7px;
+background: rgba(255,255,255,.15);
+border: none; color: #fff;
+font-size: 1rem; font-weight: 900;
+width: 22px; height: 22px;
+border-radius: 4px;
+cursor: pointer;
+display: flex; align-items: center; justify-content: center;
+z-index: 10;
+transition: background .15s;
+line-height: 1;
+}
+.rm:hover { background: rgba(255,255,255,.35); }
+
+/* ── CONTROLS ── */
+.controls {
+max-width: 1080px;
+margin: 20px auto 0;
+padding: 0 20px;
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+align-items: center;
+}
+.btn {
+padding: 11px 26px;
+font-family: var(–font);
+font-size: .78rem;
+font-weight: 800;
+letter-spacing: .06em;
+text-transform: uppercase;
+border: none;
+border-radius: 7px;
+cursor: pointer;
+transition: background .15s, transform .1s;
+}
+.btn:active { transform: scale(.96); }
+.btn-red   { background: var(–red);   color: #fff; }
+.btn-red:hover   { background: #a82020; }
+.btn-steel { background: var(–steel); color: #fff; }
+.btn-steel:hover { background: #264d63; }
+.btn-out   { background: transparent; color: var(–navy); border: 2.5px solid var(–navy); }
+.btn-out:hover   { background: var(–navy); color: #fff; }
+
+#score-box {
+margin-left: auto;
+background: #fff;
+border: 2px solid var(–border);
+border-radius: 7px;
+padding: 10px 20px;
+font-size: .82rem;
+font-weight: 800;
+color: var(–steel);
+}
+
+/* ── RESULT TABLE ── */
+#result {
+max-width: 1080px;
+margin: 22px auto 0;
+padding: 0 20px;
+display: none;
+}
+#result.show { display: block; }
+.result-inner {
+background: #fff;
+border: 2px solid var(–border);
+border-radius: 12px;
+padding: 20px 22px;
+}
+.result-inner h3 {
+font-size: .98rem;
+font-weight: 800;
+color: var(–navy);
+margin-bottom: 14px;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+font-size: .76rem;
+}
+thead th {
+background: var(–navy);
+color: #fff;
+padding: 9px 12px;
+text-align: left;
+font-weight: 700;
+letter-spacing: .04em;
+}
+tbody td {
+padding: 8px 12px;
+border-bottom: 1px solid #e4edf5;
+vertical-align: top;
+line-height: 1.5;
+}
+tbody tr:nth-child(even) td { background: #f5f9fc; }
+.tag-ok  { display:inline-block; background:var(–greenlight); color:var(–green); font-size:.62rem; font-weight:800; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:.06em; }
+.tag-no  { display:inline-block; background:var(–redlight);   color:var(–red);   font-size:.62rem; font-weight:800; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:.06em; }
+.era-tag { display:inline-block; background:var(–lightsky); color:var(–steel); font-size:.6rem; font-weight:700; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:.04em; }
 </style>
 
 </head>
@@ -463,470 +373,286 @@ width: 0%;
 <!-- HEADER -->
 
 <div class="header">
-  <div class="logo-wrap">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAKEA2QDACIAAREBAhEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMAAAERAhEAPwD3+iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorE17xboPhmLfq+qW9scZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2lucZEZO6Rh7IMsfyryrX/ANoOGPdF4e0kyntPenav4IpyfzFNJsTaR7hWDrPjPw34fLLqms2luc" alt="Approach International Logo" />
-  </div>
+  <div class="header-logo">A</div>
   <div class="header-text">
     <h1>Ethics Through the Ages: Timeline Race</h1>
-    <p>Activity 2 &mdash; Week 5: Culture, Time &amp; Business Ethics</p>
+    <p>Week 5 &mdash; Activity 2 &mdash; Business Ethics</p>
   </div>
 </div>
 
-<!-- INSTRUCTION -->
+<!-- BANNER -->
 
-<div class="instruction-banner">
-  <span class="icon">&#9998;</span>
-  <span>
-    <strong>Instructions:</strong> Drag each event card from the pool on the left and drop it into the correct position on the timeline (oldest to most recent). Once all 10 events are placed, click <strong>Check My Timeline</strong> to see your score. Click any placed card's <strong>&times;</strong> to return it to the pool.
-  </span>
+<div class="banner">
+  <strong>How to play:</strong> Drag each event card from the left panel and drop it into the correct position on the timeline (oldest &#8594; most recent). Click <strong>Check My Timeline</strong> when all 10 cards are placed. Use <strong>&times;</strong> on any card to return it to the pool.
 </div>
 
 <!-- PROGRESS -->
 
-<div class="progress-wrap">
-  <span id="progress-label">0 / 10 placed</span>
-  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="progress-row">
+  <span id="prog-label">0 / 10 placed</span>
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
 </div>
 
 <!-- MAIN -->
 
 <div class="main">
-
-  <!-- CARD POOL -->
-
   <div>
-    <div class="panel-title">Event Cards &mdash; Drag to Timeline</div>
-    <div id="card-pool" ondragover="onPoolDragOver(event)" ondrop="onPoolDrop(event)"></div>
+    <div class="col-title">Event Cards &mdash; Drag to Timeline</div>
+    <div id="pool" ondragover="poolOver(event)" ondrop="poolDrop(event)" ondragleave="poolLeave(event)"></div>
   </div>
-
-  <!-- TIMELINE -->
-
   <div>
-    <div class="panel-title">Timeline &mdash; Oldest to Most Recent</div>
+    <div class="col-title">Timeline &mdash; Oldest to Most Recent</div>
     <div id="timeline"></div>
   </div>
-
 </div>
 
 <!-- CONTROLS -->
 
 <div class="controls">
-  <button class="btn btn-primary" onclick="checkTimeline()">Check My Timeline</button>
-  <button class="btn btn-secondary" onclick="revealAnswers()">Show Answers</button>
-  <button class="btn btn-outline" onclick="resetActivity()">Reset</button>
-  <div class="score-display" id="score-display">Score: &mdash;</div>
+  <button class="btn btn-red"   onclick="check()">Check My Timeline</button>
+  <button class="btn btn-steel" onclick="reveal()">Show Answers</button>
+  <button class="btn btn-out"   onclick="reset()">Reset</button>
+  <div id="score-box">Score: &mdash;</div>
 </div>
 
-<!-- RESULT PANEL -->
+<!-- RESULT -->
 
-<div id="result-panel">
-  <div class="result-box">
+<div id="result">
+  <div class="result-inner">
     <h3 id="result-heading"></h3>
-    <table class="answer-table" id="answer-table">
+    <table>
       <thead>
         <tr>
-          <th>Position</th>
-          <th>Correct Year</th>
+          <th>#</th>
+          <th>Year</th>
           <th>Era</th>
           <th>Event</th>
-          <th>Status</th>
+          <th>Result</th>
         </tr>
       </thead>
-      <tbody id="answer-tbody"></tbody>
+      <tbody id="result-body"></tbody>
     </table>
   </div>
 </div>
 
 <script>
-// ─── DATA ────────────────────────────────────────────────────────────────────
+// ─── DATA ────────────────────────────────────────────────────────
 const EVENTS = [
-  {
-    id: 'e1',
-    label: 'Event 1',
-    text: "The Dutch 'buy' Manhattan from the Lenape tribe for about $1,000 in goods. The two cultures had very different ideas about land ownership.",
-    year: 1626,
-    era: 'Mercantilism'
-  },
-  {
-    id: 'e2',
-    label: 'Event 2',
-    text: "European countries colonize Africa and Asia, extracting raw materials (cotton, diamonds, tea) and using forced labor. Few people question this practice.",
-    year: '1800s',
-    yearSort: 1800,
-    era: 'Mercantilism / Industrial Revolution'
-  },
-  {
-    id: 'e3',
-    label: 'Event 3',
-    text: "John D. Rockefeller builds Standard Oil into a monopoly using aggressive business tactics. He also donates millions to charity.",
-    year: '1870s',
-    yearSort: 1870,
-    era: 'Industrial Revolution'
-  },
-  {
-    id: 'e4',
-    label: 'Event 4',
-    text: "Upton Sinclair publishes 'The Jungle,' exposing dangerous conditions in U.S. meatpacking plants. This leads to the first food safety laws.",
-    year: 1906,
-    era: 'Industrial Revolution / Post-Industrial'
-  },
-  {
-    id: 'e5',
-    label: 'Event 5',
-    text: "Edward Bernays markets cigarettes to women as 'Torches of Freedom,' linking smoking to equality. Doctors appear in cigarette advertisements.",
-    year: 1929,
-    era: 'Post-Industrial'
-  },
-  {
-    id: 'e6',
-    label: 'Event 6',
-    text: "The U.S. Surgeon General releases a report proving that cigarettes cause cancer. This leads to advertising bans and health warnings on packages.",
-    year: 1964,
-    era: 'Information Age'
-  },
-  {
-    id: 'e7',
-    label: 'Event 7',
-    text: "Nike is criticized for using sweatshops in China and Southeast Asia. Workers face terrible conditions for very low pay. Nike eventually demands suppliers improve.",
-    year: '1990s',
-    yearSort: 1990,
-    era: 'Information Age / Globalization'
-  },
-  {
-    id: 'e8',
-    label: 'Event 8',
-    text: "The United Nations launches the Global Compact, asking companies worldwide to follow principles about human rights, labor, environment, and anti-corruption.",
-    year: 2000,
-    era: 'Globalization'
-  },
-  {
-    id: 'e9',
-    label: 'Event 9',
-    text: "A global financial crisis caused by bank fraud and risky investments leads to the Dodd-Frank Act, which creates stricter rules for banks.",
-    year: 2008,
-    era: 'Globalization'
-  },
-  {
-    id: 'e10',
-    label: 'Event 10',
-    text: "The Petrobras scandal in Brazil reveals billions of dollars in bribes between company executives and politicians. It becomes one of the largest corruption cases in history.",
-    year: 2014,
-    era: 'Globalization'
-  }
+  { id:'e1',  num:'Event 1',  text:"The Dutch 'buy' Manhattan from the Lenape tribe for about $1,000 in goods. The two cultures had very different ideas about land ownership.",                                                          year:1626,  ys:1626, era:'Mercantilism' },
+  { id:'e2',  num:'Event 2',  text:"European countries colonize Africa and Asia, extracting raw materials (cotton, diamonds, tea) and using forced labor. Few people question this practice.",                                           year:'1800s',ys:1800, era:'Mercantilism / Industrial Revolution' },
+  { id:'e3',  num:'Event 3',  text:"John D. Rockefeller builds Standard Oil into a monopoly using aggressive business tactics. He also donates millions to charity, believing God gave him wealth for the public good.",                 year:'1870s',ys:1870, era:'Industrial Revolution' },
+  { id:'e4',  num:'Event 4',  text:"Upton Sinclair publishes 'The Jungle,' exposing dangerous conditions in U.S. meatpacking plants. This leads to the first food safety laws.",                                                        year:1906,  ys:1906, era:'Industrial Revolution / Post-Industrial' },
+  { id:'e5',  num:'Event 5',  text:"Edward Bernays markets cigarettes to women as 'Torches of Freedom,' linking smoking to equality. Doctors appear in cigarette advertisements.",                                                      year:1929,  ys:1929, era:'Post-Industrial' },
+  { id:'e6',  num:'Event 6',  text:"The U.S. Surgeon General releases a report proving that cigarettes cause cancer. This leads to advertising bans and health warnings on packages.",                                                   year:1964,  ys:1964, era:'Information Age' },
+  { id:'e7',  num:'Event 7',  text:"Nike is criticized for using sweatshops in China and Southeast Asia. Workers face terrible conditions for very low pay. Nike eventually demands suppliers improve.",                                  year:'1990s',ys:1990, era:'Information Age / Globalization' },
+  { id:'e8',  num:'Event 8',  text:"The United Nations launches the Global Compact, asking companies worldwide to follow principles about human rights, labor, environment, and anti-corruption.",                                        year:2000,  ys:2000, era:'Globalization' },
+  { id:'e9',  num:'Event 9',  text:"A global financial crisis caused by bank fraud and risky investments leads to the Dodd-Frank Act, which creates stricter rules for banks.",                                                          year:2008,  ys:2008, era:'Globalization' },
+  { id:'e10', num:'Event 10', text:"The Petrobras scandal in Brazil reveals billions of dollars in bribes between company executives and politicians. It becomes one of the largest corruption cases in history.",                        year:2014,  ys:2014, era:'Globalization' }
 ];
 
-// Sorted correct order by yearSort or year
-const CORRECT_ORDER = [...EVENTS].sort((a, b) => {
-  const ya = a.yearSort || a.year;
-  const yb = b.yearSort || b.year;
-  return ya - yb;
-});
+const CORRECT = [...EVENTS].sort((a,b) => a.ys - b.ys);
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
-let poolCards = [];     // ids in pool
-let slotCards = [];     // ids in slots (null = empty), length = 10
-let dragId = null;
-let dragFrom = null;    // 'pool' | slotIndex (number)
-let checked = false;
+// ─── STATE ───────────────────────────────────────────────────────
+let pool  = [];
+let slots = Array(10).fill(null);
+let dragId   = null;
+let dragFrom = null; // 'pool' | number
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-function init() {
-  // Shuffle pool
-  poolCards = shuffle(EVENTS.map(e => e.id));
-  slotCards = Array(10).fill(null);
-  checked = false;
+// ─── HELPERS ─────────────────────────────────────────────────────
+function getEv(id){ return EVENTS.find(e=>e.id===id); }
+function shuffle(a){ const r=[...a]; for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r; }
 
-  renderPool();
-  renderTimeline();
-  updateProgress();
-  document.getElementById('result-panel').classList.remove('visible');
-  document.getElementById('score-display').innerHTML = 'Score: &mdash;';
+// ─── INIT ─────────────────────────────────────────────────────────
+function reset(){
+  pool  = shuffle(EVENTS.map(e=>e.id));
+  slots = Array(10).fill(null);
+  dragId = null; dragFrom = null;
+  document.getElementById('score-box').innerHTML = 'Score: &mdash;';
+  document.getElementById('result').classList.remove('show');
+  renderPool(); renderTimeline(); updateProg();
 }
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+// ─── RENDER ───────────────────────────────────────────────────────
+function renderPool(){
+  const el = document.getElementById('pool');
+  el.innerHTML = '';
+  if(!pool.length){ el.innerHTML='<div class="empty-pool">All cards placed on the timeline!</div>'; return; }
+  pool.forEach(id => el.appendChild(makeCard(id,'pool')));
 }
 
-function getEvent(id) { return EVENTS.find(e => e.id === id); }
-
-// ─── RENDER ───────────────────────────────────────────────────────────────────
-function renderPool() {
-  const pool = document.getElementById('card-pool');
-  pool.innerHTML = '';
-  if (poolCards.length === 0) {
-    pool.innerHTML = '<div style="text-align:center;padding:40px 20px;color:#8cafc9;font-size:.8rem;font-weight:700;">All cards placed on timeline!</div>';
-    return;
-  }
-  poolCards.forEach(id => {
-    pool.appendChild(createCard(id, 'pool'));
-  });
+function makeCard(id, from){
+  const ev = getEv(id);
+  const d  = document.createElement('div');
+  d.className='card'; d.draggable=true; d.dataset.id=id;
+  d.innerHTML=`<div class="card-num">${ev.num}</div><div class="card-body">${ev.text}</div>`;
+  d.addEventListener('dragstart',e=>onDragStart(e,id,from));
+  d.addEventListener('dragend',  onDragEnd);
+  return d;
 }
 
-function renderTimeline() {
+function renderTimeline(){
   const tl = document.getElementById('timeline');
   tl.innerHTML = '';
-  for (let i = 0; i < 10; i++) {
-    const slot = document.createElement('div');
-    slot.className = 'timeline-slot' + (slotCards[i] ? ' filled' : '');
-    slot.innerHTML = `
-      <div class="slot-meta">
-        <div class="slot-dot"></div>
-      </div>
-      <div class="slot-drop" id="slot-${i}"
-           ondragover="onSlotDragOver(event, ${i})"
-           ondrop="onSlotDrop(event, ${i})"
-           ondragleave="onSlotDragLeave(event, ${i})"
-           onclick="onSlotClick(${i})">
-        ${slotCards[i]
-          ? buildCardInner(slotCards[i], i)
-          : `<span class="slot-placeholder">Position ${i+1}</span>`
-        }
-      </div>
-    `;
-    if (slotCards[i]) {
-      slot.querySelector('.slot-drop').classList.add('occupied');
-    }
-    tl.appendChild(slot);
-  }
-}
+  for(let i=0;i<10;i++){
+    const id  = slots[i];
+    const ev  = id ? getEv(id) : null;
+    const row = document.createElement('div');
+    row.className = 'tslot' + (id?' filled':'');
+    row.id = `tslot-${i}`;
 
-function createCard(id, from) {
-  const ev = getEvent(id);
-  const div = document.createElement('div');
-  div.className = 'event-card';
-  div.draggable = true;
-  div.dataset.id = id;
-  div.innerHTML = `<div class="card-label">${ev.label}</div><div class="card-text">${ev.text}</div>`;
-  div.addEventListener('dragstart', e => onCardDragStart(e, id, from));
-  div.addEventListener('dragend', onCardDragEnd);
-  return div;
-}
+    const dz = document.createElement('div');
+    dz.className = 'drop-zone' + (id?' occupied':'');
+    dz.id = `dz-${i}`;
+    dz.addEventListener('dragover', e=>dzOver(e,i));
+    dz.addEventListener('dragleave',e=>dzLeave(e,i));
+    dz.addEventListener('drop',     e=>dzDrop(e,i));
 
-function buildCardInner(id, slotIdx) {
-  const ev = getEvent(id);
-  return `
-    <div class="event-card" draggable="true"
-         data-id="${id}"
-         ondragstart="onCardDragStart(event, '${id}', ${slotIdx})"
-         ondragend="onCardDragEnd(event)">
-      <button class="remove-btn" onclick="removeFromSlot(event, ${slotIdx})" title="Return to pool">&times;</button>
-      <div class="card-label">${ev.label}</div>
-      <div class="card-text">${ev.text}</div>
-    </div>
-  `;
-}
-
-function updateProgress() {
-  const placed = slotCards.filter(Boolean).length;
-  document.getElementById('progress-label').textContent = `${placed} / 10 placed`;
-  document.getElementById('progress-fill').style.width = (placed * 10) + '%';
-}
-
-// ─── DRAG & DROP ──────────────────────────────────────────────────────────────
-function onCardDragStart(e, id, from) {
-  dragId = id;
-  dragFrom = from;
-  e.dataTransfer.effectAllowed = 'move';
-  setTimeout(() => {
-    const el = document.querySelector(`.event-card[data-id="${id}"]`);
-    if (el) el.classList.add('dragging');
-  }, 0);
-}
-function onCardDragEnd(e) {
-  document.querySelectorAll('.event-card').forEach(c => c.classList.remove('dragging'));
-  document.querySelectorAll('.slot-drop').forEach(s => s.classList.remove('drag-over'));
-  document.getElementById('card-pool').classList.remove('drag-over');
-}
-
-function onSlotDragOver(e, idx) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  document.getElementById(`slot-${idx}`).classList.add('drag-over');
-}
-function onSlotDragLeave(e, idx) {
-  document.getElementById(`slot-${idx}`).classList.remove('drag-over');
-}
-function onSlotDrop(e, idx) {
-  e.preventDefault();
-  document.getElementById(`slot-${idx}`).classList.remove('drag-over');
-  if (!dragId) return;
-
-  const existing = slotCards[idx];
-
-  // If slot occupied, swap
-  if (existing && existing !== dragId) {
-    // Put existing back
-    if (typeof dragFrom === 'number') {
-      // swap slot -> slot
-      slotCards[dragFrom] = existing;
+    if(ev){
+      const c = makeCard(id, i);
+      const rm = document.createElement('button');
+      rm.className='rm'; rm.textContent='×'; rm.title='Return to pool';
+      rm.addEventListener('click', e=>{ e.stopPropagation(); removeCard(i); });
+      c.appendChild(rm);
+      c.draggable = true;
+      dz.appendChild(c);
     } else {
-      poolCards.push(existing);
+      const sp = document.createElement('span');
+      sp.className='slot-label'; sp.textContent=`Position ${i+1}`;
+      dz.appendChild(sp);
     }
-  } else if (!existing && typeof dragFrom === 'number') {
-    // Clear old slot
-    slotCards[dragFrom] = null;
+
+    row.innerHTML=`<div class="tslot-meta"><div class="dot"></div></div>`;
+    row.appendChild(dz);
+    tl.appendChild(row);
   }
-
-  // Remove from pool if coming from pool
-  if (dragFrom === 'pool') {
-    poolCards = poolCards.filter(id => id !== dragId);
-  } else if (typeof dragFrom === 'number' && dragFrom !== idx) {
-    slotCards[dragFrom] = existing || null;
-  }
-
-  slotCards[idx] = dragId;
-  dragId = null;
-  dragFrom = null;
-  checked = false;
-  clearFeedback();
-
-  renderPool();
-  renderTimeline();
-  updateProgress();
 }
 
-function onPoolDragOver(e) {
+function updateProg(){
+  const n = slots.filter(Boolean).length;
+  document.getElementById('prog-label').textContent=`${n} / 10 placed`;
+  document.getElementById('prog-fill').style.width=(n*10)+'%';
+}
+
+// ─── DRAG ────────────────────────────────────────────────────────
+function onDragStart(e,id,from){
+  dragId=id; dragFrom=from;
+  e.dataTransfer.effectAllowed='move';
+  requestAnimationFrame(()=>{ const c=document.querySelector(`.card[data-id="${id}"]`); if(c)c.classList.add('dragging'); });
+}
+function onDragEnd(){
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('dragging'));
+  document.querySelectorAll('.drop-zone').forEach(z=>z.classList.remove('dv'));
+  document.getElementById('pool').classList.remove('dv');
+}
+
+function dzOver(e,i){ e.preventDefault(); e.dataTransfer.dropEffect='move'; document.getElementById(`dz-${i}`).classList.add('dv'); }
+function dzLeave(e,i){ document.getElementById(`dz-${i}`).classList.remove('dv'); }
+
+function dzDrop(e,i){
   e.preventDefault();
-  document.getElementById('card-pool').classList.add('drag-over');
+  document.getElementById(`dz-${i}`).classList.remove('dv');
+  if(!dragId) return;
+
+  const prev = slots[i]; // card already in this slot
+
+  if(typeof dragFrom === 'number' && dragFrom !== i){
+    // slot-to-slot: put prev card into the source slot
+    slots[dragFrom] = prev; // could be null
+  } else if(dragFrom === 'pool'){
+    // pool-to-slot: remove from pool; if slot had card, return it to pool
+    pool = pool.filter(x=>x!==dragId);
+    if(prev) pool.push(prev);
+  }
+
+  slots[i] = dragId;
+  dragId=null; dragFrom=null;
+  clearFeedback(); renderPool(); renderTimeline(); updateProg();
 }
-function onPoolDrop(e) {
+
+function poolOver(e){ e.preventDefault(); document.getElementById('pool').classList.add('dv'); }
+function poolLeave(e){ document.getElementById('pool').classList.remove('dv'); }
+function poolDrop(e){
   e.preventDefault();
-  document.getElementById('card-pool').classList.remove('drag-over');
-  if (!dragId) return;
-  if (typeof dragFrom === 'number') {
-    slotCards[dragFrom] = null;
-    poolCards.push(dragId);
+  document.getElementById('pool').classList.remove('dv');
+  if(!dragId || dragFrom==='pool') return;
+  if(typeof dragFrom === 'number'){
+    slots[dragFrom]=null;
+    pool.push(dragId);
   }
-  dragId = null;
-  dragFrom = null;
-  checked = false;
-  clearFeedback();
-
-  renderPool();
-  renderTimeline();
-  updateProgress();
+  dragId=null; dragFrom=null;
+  clearFeedback(); renderPool(); renderTimeline(); updateProg();
 }
 
-function onSlotClick(idx) {
-  // Touch-friendly: if a slot has a card, do nothing (remove btn handles it)
+function removeCard(i){
+  if(!slots[i]) return;
+  pool.push(slots[i]); slots[i]=null;
+  clearFeedback(); renderPool(); renderTimeline(); updateProg();
 }
 
-function removeFromSlot(e, idx) {
-  e.stopPropagation();
-  const id = slotCards[idx];
-  if (!id) return;
-  slotCards[idx] = null;
-  poolCards.push(id);
-  checked = false;
-  clearFeedback();
-  renderPool();
-  renderTimeline();
-  updateProgress();
-}
-
-// ─── CHECK ────────────────────────────────────────────────────────────────────
-function checkTimeline() {
-  const placed = slotCards.filter(Boolean).length;
-  if (placed < 10) {
-    alert('Please place all 10 event cards on the timeline before checking!');
-    return;
-  }
-  checked = true;
-
-  let correct = 0;
-  slotCards.forEach((id, i) => {
-    const slot = document.getElementById(`slot-${i}`);
-    const tsSlot = document.querySelector(`.timeline-slot:nth-child(${i+1})`);
-    if (id === CORRECT_ORDER[i].id) {
-      correct++;
-      slot.classList.add('correct');
-      slot.classList.remove('occupied');
-      if (tsSlot) {
-        tsSlot.classList.add('correct');
-        tsSlot.classList.remove('filled');
-      }
-    } else {
-      slot.classList.add('wrong');
-      slot.classList.remove('occupied');
-      if (tsSlot) {
-        tsSlot.classList.add('wrong');
-        tsSlot.classList.remove('filled');
-      }
-    }
+// ─── CHECK ────────────────────────────────────────────────────────
+function check(){
+  if(slots.filter(Boolean).length < 10){ alert('Please place all 10 cards on the timeline first!'); return; }
+  let score=0;
+  slots.forEach((id,i)=>{
+    const dz = document.getElementById(`dz-${i}`);
+    const ts = document.getElementById(`tslot-${i}`);
+    dz.classList.remove('occupied','dv');
+    ts.classList.remove('filled');
+    if(id===CORRECT[i].id){ score++; dz.classList.add('correct'); ts.classList.add('correct'); }
+    else                   {         dz.classList.add('wrong');   ts.classList.add('wrong');   }
   });
-
-  document.getElementById('score-display').textContent = `Score: ${correct} / 10`;
-  buildResultTable(false);
-  document.getElementById('result-panel').classList.add('visible');
-
-  let msg = '';
-  if (correct === 10) msg = 'Perfect score! Outstanding work!';
-  else if (correct >= 7) msg = `Great job! ${correct}/10 correct. Review the ones you missed.`;
-  else msg = `Good effort! ${correct}/10 correct. Let\'s go over the full timeline together.`;
-  document.getElementById('result-heading').textContent = msg;
+  document.getElementById('score-box').textContent=`Score: ${score} / 10`;
+  buildTable(false);
+  document.getElementById('result-heading').textContent =
+    score===10 ? 'Perfect! 10/10 — Outstanding!' :
+    score>=7   ? `Great work! ${score}/10 — Review the ones you missed.` :
+                 `${score}/10 — Let's go over the correct order together.`;
+  document.getElementById('result').classList.add('show');
 }
 
-function revealAnswers() {
-  slotCards = CORRECT_ORDER.map(e => e.id);
-  poolCards = [];
-  checked = true;
-  renderPool();
-  renderTimeline();
-  updateProgress();
-
-  document.querySelectorAll('.slot-drop').forEach((slot, i) => {
-    slot.classList.add('correct');
-    slot.classList.remove('occupied', 'wrong');
+function reveal(){
+  slots = CORRECT.map(e=>e.id);
+  pool  = [];
+  renderPool(); renderTimeline(); updateProg();
+  slots.forEach((_,i)=>{
+    const dz=document.getElementById(`dz-${i}`);
+    const ts=document.getElementById(`tslot-${i}`);
+    if(dz){ dz.classList.remove('occupied','wrong','dv'); dz.classList.add('correct'); }
+    if(ts){ ts.classList.remove('filled','wrong');        ts.classList.add('correct'); }
   });
-  document.querySelectorAll('.timeline-slot').forEach(ts => {
-    ts.classList.add('correct');
-    ts.classList.remove('filled', 'wrong');
-  });
-
-  document.getElementById('score-display').innerHTML = 'Score: &mdash;';
-  buildResultTable(true);
-  document.getElementById('result-heading').textContent = 'Correct Timeline Order:';
-  document.getElementById('result-panel').classList.add('visible');
+  document.getElementById('score-box').innerHTML='Score: &mdash;';
+  buildTable(true);
+  document.getElementById('result-heading').textContent='Correct Timeline Order:';
+  document.getElementById('result').classList.add('show');
 }
 
-function buildResultTable(showAll) {
-  const tbody = document.getElementById('answer-tbody');
-  tbody.innerHTML = '';
-  CORRECT_ORDER.forEach((ev, i) => {
-    const placedId = slotCards[i];
-    const isCorrect = placedId === ev.id;
+function buildTable(showAll){
+  const tb = document.getElementById('result-body');
+  tb.innerHTML='';
+  CORRECT.forEach((ev,i)=>{
+    const isOk = slots[i]===ev.id;
     const tr = document.createElement('tr');
-    tr.innerHTML = `
+    tr.innerHTML=`
       <td><strong>${i+1}</strong></td>
       <td><strong>${ev.year}</strong></td>
-      <td><span class="era-badge">${ev.era}</span></td>
-      <td style="font-size:.75rem;line-height:1.5">${ev.text}</td>
-      <td>${showAll ? '' : (isCorrect ? '<span class="tag-correct">Correct</span>' : '<span class="tag-wrong">Wrong</span>')}</td>
-    `;
-    tbody.appendChild(tr);
+      <td><span class="era-tag">${ev.era}</span></td>
+      <td>${ev.text}</td>
+      <td>${showAll ? '' : (isOk ? '<span class="tag-ok">Correct</span>' : '<span class="tag-no">Wrong</span>')}</td>`;
+    tb.appendChild(tr);
   });
 }
 
-function clearFeedback() {
-  document.querySelectorAll('.slot-drop').forEach(s => {
-    s.classList.remove('correct', 'wrong');
-  });
-  document.querySelectorAll('.timeline-slot').forEach(ts => {
-    ts.classList.remove('correct', 'wrong');
-  });
+function clearFeedback(){
+  for(let i=0;i<10;i++){
+    const dz=document.getElementById(`dz-${i}`);
+    const ts=document.getElementById(`tslot-${i}`);
+    if(dz) dz.classList.remove('correct','wrong');
+    if(ts) ts.classList.remove('correct','wrong');
+  }
 }
 
-function resetActivity() {
-  init();
-}
-
-// ─── START ────────────────────────────────────────────────────────────────────
-init();
+// ─── GO ───────────────────────────────────────────────────────────
+reset();
 </script>
 
 </body>
